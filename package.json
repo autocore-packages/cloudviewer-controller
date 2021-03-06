@@ -3,5 +3,8 @@
   "displayName": "cloudviewer-controller",
   "description": "controller of cloudviewer",
   "version": "0.0.5",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+
+  }
 }
