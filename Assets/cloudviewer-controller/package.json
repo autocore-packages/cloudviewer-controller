@@ -2,7 +2,7 @@
   "name": "com.autocore.cloudviewer-controller",
   "displayName": "cloudviewer-controller",
   "description": "controller of cloudviewer",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "dependencies": {
 
