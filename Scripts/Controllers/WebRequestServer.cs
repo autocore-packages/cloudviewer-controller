@@ -18,13 +18,15 @@
  *
  */
 #endregion
-using Newtonsoft.Json;
 using System;
 using System.Collections;
-using System.IO;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Assets.Scripts
 {
@@ -32,7 +34,8 @@ namespace Assets.Scripts
     {
         public string postAddress;
         public string getAddress;
-        public Action<string> OngetRequest;
+        public Action<string> OnGetRequest;
+        public Action<string> OnPostRequest;
         // Start is called before the first frame update
         void Start()
         {
@@ -41,6 +44,7 @@ namespace Assets.Scripts
 
         public IEnumerator GetWebRequest()
         {
+            Debug.Log(getAddress);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(getAddress))
             {
                 yield return webRequest.SendWebRequest();
@@ -51,7 +55,7 @@ namespace Assets.Scripts
                 else
                 {
                     Debug.Log(webRequest.downloadHandler.text);
-                    OngetRequest.Invoke(webRequest.downloadHandler.text);
+                    OnGetRequest.Invoke(webRequest.downloadHandler.text);
                 }
             }
         }
@@ -68,7 +72,6 @@ namespace Assets.Scripts
                 {
                     Debug.Log(webRequest.downloadHandler.text);
                     string jsonStr = webRequest.downloadHandler.text;
-                    
                     CVManager.Instance.addressNode.Config = JsonConvert.DeserializeObject<AddressConfig>(jsonStr);
                 }
             }
@@ -82,8 +85,8 @@ namespace Assets.Scripts
                 yield break;
             }
             string content = JsonConvert.SerializeObject(data);
-            Debug.Log(postAddress+"----"+content);
-            
+            Debug.Log(postAddress + "----" + content);
+
             byte[] databyte = Encoding.UTF8.GetBytes(content);
             UnityWebRequest webRequest = new UnityWebRequest(postAddress, UnityWebRequest.kHttpVerbPOST);
             webRequest.uploadHandler = new UploadHandlerRaw(databyte);
@@ -97,6 +100,7 @@ namespace Assets.Scripts
             }
             else
             {
+                OnPostRequest.Invoke(webRequest.downloadHandler.text);
                 Debug.Log(webRequest.downloadHandler.text);
             }
         }
@@ -120,8 +124,8 @@ namespace Assets.Scripts
             }
             else
             {
+                OnPostRequest.Invoke(webRequest.downloadHandler.text);
                 Debug.Log(webRequest.downloadHandler.text);
-                Debug.Log(webRequest.downloadedBytes);
             }
         }
     }
