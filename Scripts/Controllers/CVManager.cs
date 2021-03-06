@@ -83,8 +83,8 @@ namespace Assets.Scripts
 
         private void SetAddress(AddressConfig config)
         {
-            webRequesetServer.postAddress = config.getTrafficAddress;
-            webRequesetServer.getAddress = config.postTrafficAddress;
+            webRequesetServer.postAddress = config.postTrafficAddress ;
+            webRequesetServer.getAddress = config.getTrafficAddress;
         }
     }
 }
