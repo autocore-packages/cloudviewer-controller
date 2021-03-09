@@ -31,6 +31,12 @@ namespace Assets.Scripts
         public string light_id;
         public int color;
         public int remain;
+        public TrafficLightData(string id,int color,int remain)
+        {
+            this.light_id = id;
+            this.color = color;
+            this.remain = remain;
+        }
     }
     public class TrafficLightGroupData
     {
