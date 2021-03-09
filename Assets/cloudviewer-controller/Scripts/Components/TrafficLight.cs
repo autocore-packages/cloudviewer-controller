@@ -41,12 +41,7 @@ namespace Assets.Scripts
             {
                 if (lightData == null)
                 {
-                    lightData = new TrafficLightData
-                    {
-                        light_id = gameObject.name,
-                        color = 1,
-                        remain=30
-                    };
+                    lightData = new TrafficLightData(gameObject.name, 1, 30);
                 }
                 return lightData;
             }
