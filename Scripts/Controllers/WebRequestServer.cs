@@ -112,9 +112,17 @@ namespace Assets.Scripts
             form.AddField("color", data.color);
             form.AddField("remain", data.remain);
             UnityWebRequest webRequest = UnityWebRequest.Post(postAddress, form);
-
-
             yield return webRequest.SendWebRequest();
+            if (webRequest.result == UnityWebRequest.Result.ProtocolError || webRequest.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.LogError(webRequest.error + "\n" + webRequest.downloadHandler.text);
+            }
+            else
+            {
+
+                Debug.Log(OnGetRequest + webRequest.downloadHandler.text);
+                OnPostRequest(webRequest.downloadHandler.text);
+            }
         }
         public IEnumerator PostWebRequest(string data)
         {
