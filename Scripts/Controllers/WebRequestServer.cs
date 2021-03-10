@@ -39,7 +39,6 @@ namespace Assets.Scripts
         // Start is called before the first frame update
         void Start()
         {
-            OnGetRequest = delegate (string content) { Debug.Log(content); };
             StartCoroutine(GetJsonData(new Uri(Path.Combine(Application.streamingAssetsPath, "AddressConfig.json"))));
         }
 
