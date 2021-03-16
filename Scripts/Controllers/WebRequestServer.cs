@@ -18,15 +18,13 @@
  *
  */
 #endregion
+using Newtonsoft.Json;
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
-using Newtonsoft.Json;
-using System.IO;
 
 namespace Assets.Scripts
 {
@@ -54,7 +52,7 @@ namespace Assets.Scripts
                 }
                 else
                 {
-                    Debug.Log(OnGetRequest +webRequest.downloadHandler.text);
+                    Debug.Log(OnGetRequest + webRequest.downloadHandler.text);
                     OnGetRequest(webRequest.downloadHandler.text);
                 }
             }
@@ -79,29 +77,17 @@ namespace Assets.Scripts
 
         public IEnumerator PostWebRequest(TrafficLightData data)
         {
-            if (postAddress == null)
-            {
-                Debug.LogError("uri is null");
-                yield break;
-            }
             string content = JsonConvert.SerializeObject(data);
-            Debug.Log(postAddress + "----" + content);
-
-            byte[] databyte = Encoding.UTF8.GetBytes(content);
-            UnityWebRequest webRequest = new UnityWebRequest(postAddress, UnityWebRequest.kHttpVerbPOST);
-            webRequest.uploadHandler = new UploadHandlerRaw(databyte);
-            webRequest.downloadHandler = new DownloadHandlerBuffer();
-            webRequest.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
+            UnityWebRequest webRequest = UnityWebRequest.Post(postAddress, content);
             yield return webRequest.SendWebRequest();
-            Debug.Log(webRequest.responseCode);
             if (webRequest.result == UnityWebRequest.Result.ProtocolError || webRequest.result == UnityWebRequest.Result.ConnectionError)
             {
-                Debug.LogError(webRequest.error);
+                Debug.LogError(webRequest.error + "\n" + webRequest.downloadHandler.text);
             }
             else
             {
-                OnPostRequest.Invoke(webRequest.downloadHandler.text);
-                Debug.Log(webRequest.downloadHandler.text);
+                Debug.Log(OnGetRequest + webRequest.downloadHandler.text);
+                OnPostRequest(webRequest.downloadHandler.text);
             }
         }
         public IEnumerator PostWebRequest_Form(TrafficLightData data)
@@ -128,8 +114,6 @@ namespace Assets.Scripts
             byte[] databyte = Encoding.UTF8.GetBytes(data);
 
             UnityWebRequest webRequest1 = UnityWebRequest.Post(postAddress, data);
-            webRequest1.downloadHandler = new DownloadHandlerBuffer();
-            webRequest1.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
             yield return webRequest1.SendWebRequest();
             if (webRequest1.result == UnityWebRequest.Result.ProtocolError || webRequest1.result == UnityWebRequest.Result.ConnectionError)
             {
@@ -141,27 +125,6 @@ namespace Assets.Scripts
                 Debug.Log(OnGetRequest + webRequest1.downloadHandler.text);
                 OnPostRequest(webRequest1.downloadHandler.text);
             }
-            //if (postAddress == null)
-            //{
-            //    Debug.LogError("uri is null");
-            //    yield break;
-            //}
-            //byte[] databyte = Encoding.UTF8.GetBytes(data);
-            //UnityWebRequest webRequest = new UnityWebRequest(postAddress, UnityWebRequest.kHttpVerbPOST);
-            //webRequest.uploadHandler = new UploadHandlerRaw(databyte);
-            //webRequest.downloadHandler = new DownloadHandlerBuffer();
-            //webRequest.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
-            //yield return webRequest.SendWebRequest();
-            //Debug.Log(webRequest.responseCode);
-            //if (webRequest.result == UnityWebRequest.Result.ProtocolError || webRequest.result == UnityWebRequest.Result.ConnectionError)
-            //{
-            //    Debug.LogError(webRequest.error);
-            //}
-            //else
-            //{
-            //    OnPostRequest.Invoke(webRequest.downloadHandler.text);
-            //    Debug.Log(webRequest.downloadHandler.text);
-            //}
         }
     }
 }
