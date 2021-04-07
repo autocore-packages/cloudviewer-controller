@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 7b95e973dc160ca4888e9ada6d19817b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - reader: {instanceID: 0}
+  - line_thin: {fileID: 1978952771805637150, guid: 1e6bfc40a8cc4544c966e57975583f71, type: 3}
+  - stop_line: {fileID: 1978952771805637150, guid: 8d8cc76e10a94b3409740afd2f8ac57a, type: 3}
+  - traffic_light: {fileID: 1778297097499602, guid: 597e85f7f9640614fb81bc56394201e8, type: 3}
+  - traffic_sign: {fileID: 1978952771805637150, guid: 2bfa8a4ae25ae8c4e90c7598a940cca0, type: 3}
+  - linethinParent: {instanceID: 0}
+  - stoplineParent: {instanceID: 0}
+  - trafficlightParent: {instanceID: 0}
+  - trafficsignParent: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -23,7 +23,6 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-
     public class CVManager : MonoBehaviour
     {
         public static CVManager Instance;
@@ -40,9 +39,15 @@ namespace Assets.Scripts
                 {
                     OnChangeTL.Invoke(traffic);
                 }
+                var vehicle = selectedGo.GetComponentInParent<Vehicle>();
+                if (vehicle != null)
+                {
+                    OnChangeVehicle.Invoke(vehicle);
+                }
             }
         }
         public Action<TrafficLight> OnChangeTL;
+        public Action<Vehicle> OnChangeVehicle;
         public WebRequestServer webRequesetServer;
         GameObject goWebRequesetServer;
         public AddressNode addressNode;
