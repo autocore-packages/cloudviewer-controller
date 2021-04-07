@@ -1,3 +1,15 @@
-﻿{
-	"name": "unity.couldviewer-io"
+{
+    "name": "unity.couldviewer-io",
+    "references": [
+        "GUID:4a21c7afef549bb4d9e23a6fd9d9be39"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
